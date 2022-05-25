@@ -1,0 +1,68 @@
+﻿@model IEnumerable<medTurno_Api.Models.Turno>
+
+@{
+    ViewData["Title"] = "Index Turnos";
+    List<Turno> turno = ViewData[nameof(Turno)] as List<Turno>;
+}
+
+@if(!User.Identity.IsAuthenticated)
+ {
+     await Html.RenderPartialAsync("_Login", new LoginView());
+ }
+ else
+ {
+     <link rel="stylesheet" href="~/css/jquery.dataTables.min.css">
+     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="~/css/indexLista.css" />
+      <section>
+          <div class="box">
+            <a asp-controller="Home" asp-action="Admin" class="btn btn-primary" style="float: right; position: relative;">Administracion</a>
+            <h3>Lista de Turnos para hoy</h3>
+            <hr>
+
+            <table id="listas" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Nombre Paciente</th>
+                        <th>Doctor</th>
+                        <th>Titulo</th>
+                        <th>Fecha</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in turno)
+                    {
+                        <tr style="background: #4e5d6c;">
+                            <td><img src="~/img/avatars/turno.jpg" alt="" srcset="" style="width: 80px;"></td>
+                            <td>@Html.DisplayFor(modelItem => item.usuario.nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.doctor.nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.title)</td>
+                            <td>@Html.DisplayFor(modelItem => item.start)</td>
+                            <td><a href="/Turno/Detalles/@Html.DisplayFor(modelItem => item.Id)" style="text-decoration: none;"><ion-icon name="create" style="font-size: 35px; margin-left: 15px; color: white"></ion-icon></a></td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th>Nombre Paciente</th>
+                        <th>Doctor</th>
+                        <th>Titulo</th>
+                        <th>Fecha</th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+            </table>
+
+          </div>
+        </section>
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <script src="~/js/jquery-3.5.1.js"></script>
+        <script src="~/js/jquery.dataTables.min.js"></script>
+        <script src="~/js/listjquery.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+ }

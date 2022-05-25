@@ -1,0 +1,73 @@
+﻿@model IEnumerable<medTurno_Api.Models.Especialidad>
+
+@{
+    ViewData["Title"] = "Index Especialidades";
+    List<Especialidad> especialidad = ViewData[nameof(Especialidad)] as List<Especialidad>;
+}
+
+@if(!User.Identity.IsAuthenticated)
+ {
+     await Html.RenderPartialAsync("_Login", new LoginView());
+ }
+ else
+ {
+
+    <link rel="stylesheet" href="~/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="~/css/indexLista.css" />
+      <section>
+          <div class="box">
+            <a asp-controller="Home" asp-action="Admin" class="btn btn-primary" style="float: right; position: relative;">Administracion</a>
+            <a asp-controller="Especialidad" asp-action="Alta" class="btn btn-primary" style="float: right; position: relative; margin-right: 5px;">Altas</a>
+            <h3>Lista de Especialidades</h3>
+            <hr>
+
+            <table id="listas" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Especialidad</th>
+                        <th>Tipo</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in especialidad)
+                    {
+                        <tr style="background: #4e5d6c;">
+                            <td><img src="~/img/avatars/especialidad.jpg" alt="" srcset="" style="width: 80px;margin-left: 40px;"></td>
+                            <td>@Html.DisplayFor(modelItem => item.especialidad)</td>
+                            <td>@Html.DisplayFor(modelItem => item.tipo)</td>
+                            <td><a href="/Especialidad/Editar/@Html.DisplayFor(modelItem => item.id)" style="text-decoration: none;"><ion-icon name="create" style="font-size: 35px; margin-left: 15px; color: white"></ion-icon></a></td>
+                            <td style="background: #adb5bd;">
+                                <a onclick=Delete("/Especialidad/Delete/@Html.DisplayFor(modelItem => item.id)") class="btn btn-danger text-white" style="cursor: pointer; background-color: #495057;">
+                                <ion-icon name="trash-outline" style="font-size: 25px;color: white;padding:5px;"></ion-icon>
+                                </a>
+                            </td>
+                        </tr>
+                        
+                    }
+                
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th>Nombre</th>
+                        <th>Tipo - Especialidad</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+            </table>
+
+          </div>
+        </section>
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <script src="~/js/jquery-3.5.1.js"></script>
+        <script src="~/js/jquery.dataTables.min.js"></script>
+        <script src="~/js/listjquery.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+ }

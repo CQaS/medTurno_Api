@@ -1,0 +1,31 @@
+﻿@model medTurno_Api.Models.LoginView
+
+
+<link rel="stylesheet" href="~/css/LoginTransparet.css" />
+
+<section>
+      <img src="../img/clinic.jpg">
+      <div class="box">
+          <h2>Ingreso - MedTurno</h2>
+          <form asp-controller="Usuario" asp-action="Login">
+              
+              <div class="inputbox">
+                  <input asp-for="Usuario" Required>
+                  <label for="">Username</label>
+              </div>
+              <div class="inputbox">
+                <input asp-for="Password" Required>
+                <label for="">Password</label>
+            </div>
+            <input type="submit" value="Entrar">
+            <a class="btn btn-danger"  asp-controller="Usuario" asp-action="RecuperaPass">Olvidaste?</a>
+          </form>
+      </div>
+</section>
+
+
+
+
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

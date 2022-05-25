@@ -1,0 +1,129 @@
+section
+{
+    margin-left: -80px;
+    margin-right: -80px;
+    min-height: 680px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-image: linear-gradient(to bottom, #283048, #859398);
+    background-size: 50% auto, cover;
+}
+
+.box .dataTables_wrapper .dataTables_filter 
+{
+    height: 50px;
+    border-radius: 50px;
+    padding: 5px 20px;
+    padding-left: 15px;
+    font-size: 18px;
+    outline: none;
+    border: 2px solid #999;
+    transform: translate(-210px, -82px);
+}
+
+.box .dataTables_wrapper .dataTables_paginate .paginate_button
+{
+    color: #f04e4e !important;
+}
+
+.box .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate
+{
+    margin-left: 110px;
+}
+
+.box .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate label
+{
+    color: white;
+}
+
+.box table.dataTable th.dt-center, table.dataTable td.dt-center, table.dataTable td.dataTables_empty 
+{
+    color: black;
+    font-size: 20px;
+}
+
+.box .dataTables_wrapper .dataTables_filter input
+{
+    margin-left: 10px;
+    margin-top: 3px;
+    color: white;
+}
+
+.box .dataTables_wrapper .dataTables_length select
+{
+    color: white;
+}
+
+.box
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+    position: relative;
+    min-width: 825px;
+    background: #287bff;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 20px;
+    box-shadow: 0 35px 50px rgba(0, 0, 0, 1);
+}
+
+.box::before
+{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(100% - 120px);
+    height: 100%;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background: linear-gradient(to bottom, #283048, #2f363e9e, #283048);
+}
+
+.box h3
+{
+    position: relative;
+    color: rgb(250, 248, 248);
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    padding-left: 110px;
+    text-transform: uppercase;
+    width: 445px;
+}
+
+.box hr
+{
+    position: relative;
+    background: rgb(255, 255, 255);
+    width: 89%;
+    margin-left: 110px;
+    height: 10px;
+}
+
+@media screen and (max-width: 480px) 
+{
+    section
+    {
+        margin-right: -167px;
+    }
+    
+    .box
+    {
+       margin-left: 14%;
+       min-width: 575px; 
+    } 
+    
+    .box hr
+    {
+        width: 79%;
+    }
+
+    .box .dataTables_wrapper .dataTables_filte
+    {
+        transform: translate(45px,0px);
+        padding-left: 0px;
+        width: 280px;
+    }    
+}

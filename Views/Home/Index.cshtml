@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Bienvenido";
+ }
+
+ @if(!User.Identity.IsAuthenticated)
+ {
+     await Html.RenderPartialAsync("_Login", new LoginView());
+ }
+ else
+ {
+
+    <link rel="stylesheet" href="~/css/styleGenerico.css" />
+    <section>
+        <header>
+          <a class="logo">Administracion.</a>
+          <div class="togle" onclick="menuTogle();"></div>
+        </header>
+        <div class="glass"></div>
+        <div class="contenido">
+          <h2>MedTurno<br><span>Tu Salud. Mi resposabilidad</span> </h2>
+        </div>
+        <video src="img/sala.mp4" autoplay muted loop></video>
+        <ul class="link">
+          <li style="--i:1"><a href="https://www.facebook.com">Facebook</a></li>
+          <li style="--i:2"><a href="https://twitter.com/?lang=es">Tweeter</a></li>
+          <li style="--i:3"><a href="https://www.instagram.com/?hl=es-la">Instagram</a></li>
+        </ul>
+        <ul class="navlink">
+          <li style="--i:1"><a asp-controller="Home" asp-action="Admin">Home</a></li>
+          <li style="--i:2"><a asp-controller="Turno" asp-action="Calendario">Calendario</a></li>
+          <li style="--i:3"><a asp-controller="Usuario" asp-action="Index">Pacientes</a></li>
+          <li style="--i:3"><a asp-controller="Usuario" asp-action="Logout">Salir</a></li>
+        </ul>
+    </section>
+
+    <script src="~/js/site.js"></script>
+ }
+ 

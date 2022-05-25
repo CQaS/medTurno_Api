@@ -1,0 +1,96 @@
+﻿@model medTurno_Api.Models.Turno
+
+@{
+    ViewData["Title"] = "Index de Turno";
+}
+
+@if(!User.Identity.IsAuthenticated)
+ {
+     await Html.RenderPartialAsync("_Login", new LoginView());
+ }
+ else
+ {
+     <link rel="stylesheet" href="~/css/form.css" />
+    <section>
+        <div class="contenedor">
+            <div class="contactinfo">
+                <div>
+                    <h2>Informacion de Contacto</h2>
+                    <ul class="info">
+                        <li>
+                            <span><ion-icon name="location-outline"></ion-icon></span>
+                            <span>Los Tilos 33. <br> Merlindo, CP5881</span>
+                        </li>
+                        <li>
+                            <span><ion-icon name="mail-unread-outline"></ion-icon></span>
+                            <span>mail@mail.com</span>
+                        </li>
+                        <li>
+                            <span><ion-icon name="call-outline"></ion-icon></span>
+                            <span>Movil: 36362728</span>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="social">
+                    <li><a href="#"><ion-icon name="logo-facebook"></ion-icon></a></li>
+                    <li><a href="#"><ion-icon name="logo-twitter"></ion-icon></a></li>
+                    <li><a href="#"><ion-icon name="logo-youtube"></ion-icon></a></li>
+                    <li><a href="#"><ion-icon name="logo-instagram"></ion-icon></a></li>
+                </ul>
+            </div>
+            <div class="formcontact">
+                <h2>Info del Turno - Paciente: @Model.usuario.nombre</h2>
+                <h6>O.S.: @Model.prestador.nombre</h6>
+                    <div class="formbox">
+                        <div class="inputbox w50">
+                            <label asp-for="fechaSolicitud"></label>
+                            <h4>@Model.fechaSolicitud</h4>
+                        </div>
+                        <div class="inputbox w50">
+                            <label asp-for="start"></label>
+                            <h4>@Model.start</h4>
+                        </div>
+                        <div class="inputbox w50">
+                            <label asp-for="title"></label>
+                            <h4>@Model.title</h4>
+                        </div>
+                        <div class="inputbox w50">
+                            <label asp-for="descripcion"></label>
+                            <h4>@Model.descripcion</h4>
+                        </div>                        
+                        <div class="inputbox w50">
+                            <label asp-for="doctor.nombre"></label>
+                            <h4>@Model.doctor.nombre</h4>
+                        </div>
+                        <div class="inputbox w50">
+                            <label asp-for="estado"></label>
+                            <select name="estados" id="estados" onchange="selectEstados();" >
+                                @if(@Model.estado == 1){<option  value="@Model.Id-1" selected>Particular</option>}
+                                @if(@Model.estado == 2){<option  value="@Model.Id-2" selected>Pendiente</option>}
+                                @if(@Model.estado == 5){<option  value="@Model.Id-5" selected>Urgente</option>}
+                                @if(@Model.estado == 6){<option  value="@Model.Id-6" selected>Prioritario</option>}
+                                @if(@Model.estado == 7){<option  value="@Model.Id-7" selected>O.Social</option>}
+                                @if(@Model.estado == 8){<option  value="@Model.Id-8" selected>Normal</option>}
+                                <option style="background:#52af52" value="@Model.Id-8">Normal</option>
+                                <option style="background:#ff0000" value="@Model.Id-5">Urgente</option>
+                                <option style="background:#ffff0070" value="@Model.Id-6">Prioritario</option>
+                                <option style="background:#e03197" value="@Model.Id-1">Particular</option>
+                                <option style="background:#e67e7e" value="@Model.Id-7">Obra Solcial</option>
+                                <option style="background:#30E8BF" value="@Model.Id-4">Atendido</option>
+                                <option style="background:#f5af19" value="@Model.Id-3">Rechazado</option>
+                                <option style="background:#c31432" value="@Model.Id-0">Eliminado</option>
+                            </select>
+                            
+                        </div>
+                        <div class="inputbox w100">
+                            <a asp-controller="Home" asp-action="Admin" class="btn btn-primary admin">Administracion</a> <a class="ir" asp-controller="Turno" asp-action="Index">Ver Lista</a>
+                        </div>
+                    </div>
+            </div>
+        </div> 
+      </section>
+      
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+ }

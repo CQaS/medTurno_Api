@@ -1,0 +1,74 @@
+﻿ @model medTurno_Api.Models.Prestador
+
+@{ 
+    ViewData["Title"] = "Crear Prestador"; 
+}
+
+@if(!User.Identity.IsAuthenticated)
+ {
+     await Html.RenderPartialAsync("_Login", new LoginView());
+ }
+else
+{
+
+    <link rel="stylesheet" href="~/css/form.css" />
+    <section>
+        <div class="contenedor">
+            <div class="contactinfo">
+                <div>
+                    <h2>Informacion de Contacto</h2>
+                    <ul class="info">
+                        <li>
+                            <span><ion-icon name="location-outline"></ion-icon></span>
+                            <span>Los Tilos 33. <br> Merlindo, CP5881</span>
+                        </li>
+                        <li>
+                            <span><ion-icon name="mail-unread-outline"></ion-icon></span>
+                            <span>mail@mail.com</span>
+                        </li>
+                        <li>
+                            <span><ion-icon name="call-outline"></ion-icon></span>
+                            <span>Movil: 36362728</span>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="social">
+                    <li><a href="#"><ion-icon name="logo-facebook"></ion-icon></a></li>
+                    <li><a href="#"><ion-icon name="logo-twitter"></ion-icon></a></li>
+                    <li><a href="#"><ion-icon name="logo-youtube"></ion-icon></a></li>
+                    <li><a href="#"><ion-icon name="logo-instagram"></ion-icon></a></li>
+                </ul>
+            </div>
+            <div class="formcontact">
+                <h2>Alta de Prestadores</h2>
+                <a asp-controller="Prestador" asp-action="Index" style="color: #fff;background-color: #0d6efd;padding: 10px;border-radius: 10px;border-color: #0d6efd;margin-left: 580px; text-decoration: none;">Listar</a>
+                <form asp-controller="Prestador" asp-action="Alta" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" id="formulario" value="OSocial">
+                    <div class="formbox">
+                        <div class="inputbox w50">
+                            <input asp-for="nombre" placeholder="Nombre O.Social" onkeydown="validar()"/>
+                            <span asp-validation-for="nombre" class="text-danger"></span>
+                        </div>
+                        <div class="inputbox w50">
+                            <input asp-for="direccion" placeholder="Direccion" onkeydown="validar()"/>
+                            <span asp-validation-for="direccion" class="text-danger"></span>
+                        </div>
+                        <div class="inputbox w50">
+                            <input asp-for="telefono" placeholder="Telefono" onkeydown="validar()"/>
+                            <span asp-validation-for="telefono" class="text-danger"></span>
+                        </div>
+                        <div class="inputbox w100">
+                            <input type="submit" name="" id="Enviar" value="Alta" style="display: none;">  <a  class="ir" asp-controller="Home" asp-action="Admin">Cancelar</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div> 
+      </section>
+      
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+} 
+

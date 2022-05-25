@@ -1,0 +1,133 @@
+﻿ @model medTurno_Api.Models.Usuario
+
+@{ 
+    ViewData["Title"] = "Crear Paciente";
+    List<Prestador> prestador = ViewData[nameof(Prestador)] as List<Prestador>;
+    List<Direccion> direccion = ViewData[nameof(Direccion)] as List<Direccion>; 
+}
+
+@if(!User.Identity.IsAuthenticated)
+ {
+     await Html.RenderPartialAsync("_Login", new LoginView());
+ }
+else
+{
+    <link rel="stylesheet" href="~/css/form.css" />
+    <section>
+        <div class="contenedor">
+            <div class="contactinfo">
+                <div>
+                    <h2>Informacion de Contacto</h2>
+                    <ul class="info">
+                        <li>
+                            <span><ion-icon name="location-outline"></ion-icon></span>
+                            <span>Los Tilos 33. <br> Merlindo, CP5881</span>
+                        </li>
+                        <li>
+                            <span><ion-icon name="mail-unread-outline"></ion-icon></span>
+                            <span>mail@mail.com</span>
+                        </li>
+                        <li>
+                            <span><ion-icon name="call-outline"></ion-icon></span>
+                            <span>Movil: 36362728</span>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="social">
+                    <li><a href="#"><ion-icon name="logo-facebook"></ion-icon></a></li>
+                    <li><a href="#"><ion-icon name="logo-twitter"></ion-icon></a></li>
+                    <li><a href="#"><ion-icon name="logo-youtube"></ion-icon></a></li>
+                    <li><a href="#"><ion-icon name="logo-instagram"></ion-icon></a></li>
+                </ul>
+            </div>
+            <div class="formcontact" style="height: 125%;">
+                <h2>Alta de Pacientes</h2>
+                
+                <form asp-controller="Usuario" asp-action="Alta" enctype="multipart/form-data" style="margin-top: -10px;">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" id="formulario" value="Usuario">
+                    <div class="formbox">
+                        <div class="inputbox w50">
+                            <input asp-for="dni" placeholder="DNI" onkeydown="validar()"/>
+                            <span asp-validation-for="dni" class="text-danger"></span>
+                        </div>
+                        <div class="inputbox w50">
+                            <input asp-for="nombre" placeholder="Nombre" onkeydown="validar()"/>
+                            <span asp-validation-for="nombre" class="text-danger"></span>
+                        </div>
+                        <div class="inputbox w50">
+                            <input asp-for="Mail" placeholder="E-mail" onkeydown="validar()"/>
+                            <span asp-validation-for="Mail" class="text-danger"></span>
+                        </div>
+                        <div class="inputbox w50">
+                            <input asp-for="telefono" placeholder="Telefono" onkeydown="validar()"/>
+                            <span asp-validation-for="telefono" class="text-danger"></span>
+                        </div>
+                        <div class="inputbox w50">
+                            <select class="form-control" name="idDireccion" id="idDireccion" style="border: 1px solid black;" onchange="selectDireccion();">
+                                <option value="0">Seleccionar Una Direccion?</option>
+                                @foreach (var item in direccion) 
+                                {
+
+                                    <option value="@item.id">@(item.calle + " nro:" + item.numero + ". Loc.: " + item.ciudad)</option>                      
+                                }
+                            </select>
+                        </div>
+                        <div class="inputbox w50">
+                            <input asp-for="direccion.calle" placeholder="Calle" onkeydown="validar()"/>
+                            <span asp-validation-for="direccion.calle" class="text-danger"></span>
+                        </div>
+                        <div class="inputbox w50">
+                            <input asp-for="direccion.numero" value="000" placeholder="Numero" onkeydown="validar()"/>
+                            <span asp-validation-for="direccion.numero" class="text-danger"></span>
+                        </div>
+                        <div class="inputbox w50">
+                            <input asp-for="direccion.ciudad" placeholder="Ciudad" onkeydown="validar()"/>
+                            <span asp-validation-for="direccion.ciudad" class="text-danger"></span>
+                        </div>                       
+                        <div class="inputbox w50">
+                            <input asp-for="password" placeholder="Password" onkeydown="validar()"/>
+                            <span asp-validation-for="password" class="text-danger"></span>
+                        </div>
+                        <div class="inputbox w50">
+                            <input asp-for="pregunta" placeholder="Pregunta" onkeydown="validar()"/>
+                            <span asp-validation-for="pregunta" class="text-danger"></span>
+                        </div>
+                        <div class="inputbox w50">
+                            <input type="date" id="fecNac" name="fecNac">
+                        </div>
+                        <div class="inputbox w50">
+                            <select class="form-control" name="idPrestador" style="border: 1px solid black;">
+                                <option>Selecciona Prestador</option>
+                                @foreach (var item in prestador) 
+                                {
+
+                                    <option value="@item.Id">@(item.nombre)</option>                      
+                                }
+                            </select>
+                        </div>
+                        <div class="inputbox w50">
+                            <select class="form-control" name="Rol" style="border: 1px solid black;">
+                                <option>Selecciona Rol</option>
+                                @foreach (var item in (IDictionary<int, string>)ViewBag.Roles)
+                                {
+                                    if(item.Key == 4){ continue; }                                    
+                                    <option value="@item.Key">@(item.Value)</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Rol" class="text-danger"></span>
+                        </div>
+                        <div class="inputbox w100">
+                            <input type="submit" name="" id="Enviar" value="Alta" style="display: none;"> <a class="ir" asp-controller="Home" asp-action="Admin">Cancelar</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div> 
+      </section>
+      
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+} 
+

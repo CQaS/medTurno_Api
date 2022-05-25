@@ -1,0 +1,14 @@
+﻿@* @model IEnumerable<medTurno_Api.Models.Historiaclinica>
+
+@{
+    ViewData["Title"] = "Index Historiaclinica";
+    //List<Historiaclinica> Historiaclinica = ViewData[nameof(Historiaclinica)] as List<Historiaclinica>;
+}
+
+@if(!User.Identity.IsAuthenticated)
+ {
+     await Html.RenderPartialAsync("_Login", new LoginView());
+ }
+ else
+ {
+ } *@

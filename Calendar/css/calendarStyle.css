@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto+Condensed:wght@300&display=swap');
+
+body
+{
+    background: linear-gradient(to top, #283048b8, #859398);
+}
+
+body .container
+{
+    padding-bottom: 30px;
+}
+
+.logomedturno
+{
+    position: absolute;
+    width: 100px;
+    margin: 50px;
+    margin-left: 140px;
+}
+
+.fc-view-container
+{
+    border: 2px solid blue;
+    box-shadow: 0 7px 25px #e9ecef;
+}
+
+.fc-content
+{
+    cursor:pointer;
+}
+
+.modal-content
+{
+    box-shadow: 0 5px 35px rgba(0,0,0);
+    border-radius: 20px;
+    background:#6787FC;
+}
+
+.modal-content #closeModal
+{
+    border: 1px solid black;
+}
+
+.modal-content #closeModal2
+{
+    border: 1px solid black;
+    border-radius: 50%;
+}
+
+.modal-content:hover
+{
+    transform: translate(3px);
+}
+
+.fc th
+{
+    padding: 10px 0px;
+    vertical-align: middle;
+    background: violet;
+}
+
+.fc-day-grid-event .fc-content:hover
+{
+    z-index: 1;
+    transform: scale(1.03);
+    box-shadow: 0 5px 45px rgb(43, 42, 42);
+}
+
+table a.fc-more
+{
+    color: #0a0c0a;
+}
+
+.fc-row td:hover
+{
+    background: greenyellow;
+}
+
+.fc-toolbar .fc-center h2
+{
+    text-transform: capitalize;
+}
+
+.fc-row .fc-content-skeleton .fc-day-number
+{
+    font-size: 1.8em;
+}
+
+.fc-day-header span
+{
+    text-transform: uppercase;
+}
+
+.container #boton
+{
+    position: relative;
+    width: 70px;
+    height: 30px;
+    display: inline-block;
+    background: white;
+    margin: 20px;
+}
+
+.container #boton::before,
+.container #boton::after
+{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #8b68ce;
+    transition: 0,5s;
+}
+
+.container #boton::before,
+.container #boton::after
+{
+    background: linear-gradient(45deg, #00ccff,
+    #0a180c,#0a0c0a,#d400d4);
+}
+
+.container #boton:hover:before
+{
+    inset: -3px;
+}
+
+.container #boton:hover:after
+{
+    inset: -3px;
+    filter: blur(40px);
+}
+
+.container #boton span
+{
+    position:absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    background: rgb(65, 29, 196);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: azure;
+    border: 1px solid black;
+}
+
+.container #boton span:hover
+{
+    transform: scale(1.1);
+    background: rgb(87, 57, 197);
+}
+
+#tur
+{
+    font-size: 6em;
+    text-align: center;
+    width: 480px;
+    transform: translateX(400px);
+}
+
+#tur span
+{
+    position: relative;
+    display: inline-flex;
+    color: slateblue;
+    font-weight: 700;
+}
+
+#tur span:nth-child(odd)
+{
+    letter-spacing: -1em;
+    color: rgb(199, 21, 133);
+    line-height: 1em;
+    overflow: hidden;
+    transition: 0.6s ease-in-out;
+}
+
+#tur:hover span:nth-child(odd)
+{
+    letter-spacing: 0;
+    font-weight: 450;
+}
+
+#tur span:nth-child(2)
+{
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+#tur span:nth-child(2):after
+{
+    content:'v2';
+    position: absolute;
+    bottom: 0;
+    top: 85px;
+    right: -20px;
+    font-size: 0.35em;
+}
+
+.container .row .box
+{
+    
+    background: #0563af;
+    color: white;
+    padding: 10px;
+    width: 350px;
+    height: 50px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, .5);
+    cursor: pointer;
+}
+
+ion-icon
+{
+    position: absolute;
+    text-align: center;
+    left: 90%;
+    top: 5%;
+    width: 10%;
+    height: 90%;
+    color: white;
+    font-size: 30px;
+    background: #007ce0;
+    cursor: pointer;
+}
+
+.login
+{
+    margin: 45px;
+    margin-left: 75px;
+    margin-bottom: -60px;
+    width: 310px;
+}
+
+.login h2
+{
+    position: relative;
+    color: white;
+    font-size: 3vw;
+    line-height: 0.55em;
+    text-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+    font-family: 'Dancing Script', cursive;
+}
+
+.btnadmin
+{
+    float: right;
+    margin-right: 75px;
+    margin-top: 20px;
+}

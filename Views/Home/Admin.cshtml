@@ -1,0 +1,313 @@
+﻿@model medTurno_Api.Models.Turno
+
+@{
+    ViewData["Title"] = "Index Admin";
+    List<Turno> turnoEstado = ViewData[nameof(Turno)] as List<Turno>;
+    int id = ViewBag.id;
+}
+
+@if(!User.Identity.IsAuthenticated)
+ {
+     await Html.RenderPartialAsync("_Login", new LoginView());
+ }
+ else
+ {
+     <link rel="stylesheet" href="~/css/admin.css" />
+     <div class="contenedor">
+          <div class="nav">
+              <ul>
+                  <li>
+                      <a>
+                          <span class="icon"><ion-icon name="briefcase-outline"></ion-icon></span>
+                          <span class="titulo">Administracion General</span>
+                      </a>
+                  </li>
+                  <li>
+                    <a asp-controller="Usuario" asp-action="Index">
+                        <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+                        <span class="titulo">Listar Paciente</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Turno" asp-action="Index">
+                        <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
+                        <span class="titulo">Listar Turnos</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Especialidad" asp-action="Index">
+                        <span class="icon"><ion-icon name="document-attach-outline"></ion-icon></span>
+                        <span class="titulo">Lista Especialidad</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Especialidad" asp-action="Alta">
+                        <span class="icon"><ion-icon name="document-text-outline"></ion-icon></span>
+                        <span class="titulo">Alta Especialidades</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Doctor" asp-action="Alta">
+                        <span class="icon"><ion-icon name="medkit-outline"></ion-icon></span>
+                        <span class="titulo">Alta Profecionales</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Prestador" asp-action="Alta">
+                        <span class="icon"><ion-icon name="pulse-outline"></ion-icon></span>
+                        <span class="titulo">Alta O.Social</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Usuario" asp-action="Logout">
+                        <span class="icon"><ion-icon name="exit-outline"></ion-icon></span>
+                        <span class="titulo">Salir</span>
+                    </a>
+                </li>
+              </ul>
+              <img class="medturno" src="~/img/medTurno.jpg">
+          </div>
+
+          <!-- main -->
+          <div class="main">
+              <div class="topbar">
+                  <div class="tog">
+                    <ion-icon name="menu-outline"></ion-icon>
+                  </div>
+                  <!-- search -->
+                  @* <div class="search">
+                      <label for="">
+                          <input type="text" name="search" placeholder="Buscar">
+                          <ion-icon name="search-outline"></ion-icon>
+                      </label>
+                  </div> *@ 
+                  <!-- usuario -->
+                  <div class="users">
+                      <a href="/Usuario/Editar/@Html.DisplayFor(modelItem => id)" style="text-decoration: none;">
+                          <img src="@ViewBag.av" alt="" srcset="">
+                      </a>                      
+                  </div>
+              </div>
+
+              <!-- menu altas box -->
+              <div class="cardbox">
+
+                <a asp-controller="Usuario" asp-action="Alta" style="text-decoration: none;">
+                  <div class="card">
+                      <div>
+                          <div class="num">
+                              Alta
+                          </div>
+                          <div class="cardnombre">
+                              Pacientes
+                          </div>
+                      </div>
+                      <div class="iconbox">
+                        <ion-icon name="person-add-outline"></ion-icon>
+                      </div>
+                  </div>
+                </a>
+                <a asp-controller="Turno" asp-action="Calendario" style="text-decoration: none;">
+                    <div class="card">
+                        <div>
+                            <div class="num">
+                                Alta
+                            </div>
+                            <div class="cardnombre">
+                                Turnos
+                            </div>
+                        </div>
+                        <div class="iconbox">
+                            <ion-icon name="calendar-outline"></ion-icon>
+                        </div>
+                    </div>
+                </a>
+                <a asp-controller="Prestador" asp-action="Index" style="text-decoration: none;">
+                    <div class="card">
+                        <div>
+                            <div class="num">
+                                Lista
+                            </div>
+                            <div class="cardnombre">
+                                O.Social
+                            </div>
+                        </div>
+                        <div class="iconbox">
+                            <ion-icon name="pulse-outline"></ion-icon>
+                        </div>
+                    </div>
+                </a>
+                <a asp-controller="Doctor" asp-action="Index" style="text-decoration: none;">
+                    <div class="card">
+                        <div>
+                            <div class="num">
+                                Lista
+                            </div>
+                            <div class="cardnombre" style="margin-left: -10px;">
+                                Profecionales
+                            </div>
+                        </div>
+                        <div class="iconbox">
+                            <ion-icon name="list-outline"></ion-icon>
+                        </div>
+                    </div>
+                </a>
+              </div>
+
+              
+              <div class="detalles">
+                  <!-- Lista de turnos -->
+                  <div class="turnorecientes">
+                    <div class="cardheader">
+                        <h2>Turnos Urgentes & Pendientes</h2>
+                        <a asp-controller="Turno" asp-action="Index" class="boton">Ver Lista</a>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Paciente</td>
+                                <td>Fecha</td>
+                                <td>Doctor</td>
+                                <td>Estado</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in turnoEstado) 
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.usuario.nombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.start)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.doctor.nombre)
+                                    </td>
+                                    <td>
+                                        @if(item.estado == 2){<a href="/Home/Admin/@Html.DisplayFor(modelItem => item.Id)" style="text-decoration: none;"><span class="estado" style="background: #5b5be2;">Pendiente</span></a>}
+                                        @if(item.estado == 5){<a href="/Home/Admin/@Html.DisplayFor(modelItem => item.Id)" style="text-decoration: none;"><span class="estado" style="background: #ff0000;">Urgente</span></a>}
+                                        @if(item.estado == 6){<a href="/Home/Admin/@Html.DisplayFor(modelItem => item.Id)" style="text-decoration: none;"><span class="estado" style="background: #ffff0070;">Prioritario</span></a>}                                        
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                  </div>
+                  <!-- nuevos -->
+                  <div class="nuevos">
+                      <div class="cardheader">
+                        <h2>Nuevos....</h2>
+                      </div>
+                      <table>
+                          <tr>
+                            <td width="60px"><div class="imgbox"><img src="~/img/avatars/Empleado.png" alt="" srcset=""></div></td>
+                            <td><h4>Ines <br><span>BsAs</span></h4></td>
+                          </tr>
+                          <tr>
+                            <td width="60px"><div class="imgbox"><img src="~/img/avatars/Empleado.png" alt="" srcset=""></div></td>
+                            <td><h4>Ines <br><span>BsAs</span></h4></td>
+                        </tr>
+                        <tr>
+                            <td width="60px"><div class="imgbox"><img src="~/img/avatars/Empleado.png" alt="" srcset=""></div></td>
+                            <td><h4>Ines <br><span>BsAs</span></h4></td>
+                        </tr>
+                        <tr>
+                            <td width="60px"><div class="imgbox"><img src="~/img/avatars/Empleado.png" alt="" srcset=""></div></td>
+                            <td><h4>Ines <br><span>BsAs</span></h4></td>
+                        </tr>
+                        <tr>
+                            <td width="60px"><div class="imgbox"><img src="~/img/avatars/Empleado.png" alt="" srcset=""></div></td>
+                            <td><h4>Ines <br><span>BsAs</span></h4></td>
+                        </tr>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+    
+    @* Modal para estado de turnos *@
+    <div class="modal fade right" id="estadoTurno" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="true">
+      <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-danger" role="document">
+        
+        <div class="modal-content" style="box-shadow: 0 60px 170px rgb(0 0 0);">
+          
+          <div class="modal-header">
+            <p class="heading">
+                <strong>MedTurno</strong> - Cambio de estado de Turno<br> 
+                Fecha: @Model.start
+            </p>
+            <button type="button"  id="closeModal2" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true" class="white-text">&times;</span>
+            </button>
+          </div>
+          
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-3">
+                <p></p>
+                <p class="text-center">
+                    <ion-icon name="document-text" style="font-size: 85px;"></ion-icon>
+                </p>
+              </div>
+              <div class="col-9">
+                <p>El cambio del "Estado" de un Turno, implica el posterios aviso al paciente de esta medida adoptada por MedTurno.</p>
+                <p>
+                    <strong>
+                        En caso de no conformidad del paciente <h3>@ViewBag.p</h3> este debera solicitar nuevamente un 
+                        <u>Turno</u>.
+                    </strong>
+                </p>
+                <h2>
+                  <span class="badge">Notifiquese!</span>
+                </h2>
+              </div>                    
+            </div>
+          </div>
+
+          
+          <div class="modal-footer flex-center">
+            <div class="col-md-6">
+
+                <select  id="estados" onchange="selectEstados();" style="margin-left: -30px;text-align: center;background: #0563af;color: white;padding: 10px;width: 230px;height: 45px;border: none;font-size: 20px;box-shadow: 0 5px 25px rgb(0 0 0 / 50%);cursor: pointer;border-radius: 20px;">
+                    @if(@Model.estado == 1){<option  value="@Model.Id-1" selected>Particular</option>}
+                    @if(@Model.estado == 2){<option  value="@Model.Id-2" selected>Pendiente</option>}
+                    @if(@Model.estado == 5){<option  value="@Model.Id-5" selected>Urgente</option>}
+                    @if(@Model.estado == 6){<option  value="@Model.Id-6" selected>Prioritario</option>}
+                    @if(@Model.estado == 7){<option  value="@Model.Id-7" selected>O.Social</option>}
+                    @if(@Model.estado == 8){<option  value="@Model.Id-8" selected>Normal</option>}
+                    <option style="background:#52af52" value="@Model.Id-8">Normal</option>
+                    <option style="background:#ff0000" value="@Model.Id-5">Urgente</option>
+                    <option style="background:#ffff0070" value="@Model.Id-6">Prioritario</option>
+                    <option style="background:#e03197" value="@Model.Id-1">Particular</option>
+                    <option style="background:#e67e7e" value="@Model.Id-7">Obra Solcial</option>
+                    <option style="background:#30E8BF" value="@Model.Id-4">Atendido</option>
+                    <option style="background:#f5af19" value="@Model.Id-3">Rechazado</option>
+                    <option style="background:#c31432" value="@Model.Id-0">Eliminado</option>
+                </select>
+
+            </div>
+            <button type="button"  id="closeModal" class="btn btn-outline-danger waves-effect" data-dismiss="modal">
+                Cancelar<ion-icon name="close-circle"></ion-icon>
+            </button>
+          </div>
+        </div>        
+      </div>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="~/js/site.js"></script>
+ }
+
+ @if(@Model.Id > -1)
+{
+    <script>
+        var locModal = document.getElementById('estadoTurno');
+        locModal.style.display = "block";
+        locModal.style.paddingRight = "17px";
+        locModal.style.paddingTop = "80px";
+        locModal.className="modal fade show"; 
+    </script>
+}
