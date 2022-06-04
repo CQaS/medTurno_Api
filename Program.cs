@@ -36,7 +36,8 @@ namespace medTurno_Api
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 //.UseUrls("http://localhost:5000", "https://localhost:5001")
-                .UseUrls("http://localhost:5000", "http://localhost:5001")
+                //.UseUrls("http://localhost:5000", "http://localhost:5001")
+                .UseUrls("http://*:5000", "https://*:5001")
                 .UseIISIntegration()
                 .UseStartup<Startup>();
             return host;

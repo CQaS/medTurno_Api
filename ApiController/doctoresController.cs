@@ -30,13 +30,13 @@ namespace medTurno_Api.ApiController
             try
             {
                 var res = await _context.Doctor.OrderBy(a => a.nombre)
-                             .Include(x => x.especialidad)
-                             .Where(x => x.idEspecialidad == x.especialidad.id)
-                             .Select(a => new 
-                            { 
-                                a.id, a.nombre, a.matricula, a.especialidad.especialidad
-                            })
-                            .ToListAsync();
+                                                .Include(x => x.especialidad)
+                                                .Where(x => x.idEspecialidad == x.especialidad.id)
+                                                .Select(a => new 
+                                                { 
+                                                    a.id, a.nombre, a.matricula, a.especialidad.especialidad
+                                                })
+                                                .ToListAsync();
                 return Ok(res);
             }
             catch (Exception ex)

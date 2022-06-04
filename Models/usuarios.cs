@@ -22,7 +22,6 @@ namespace medTurno_Api.Models
 		[Display(Name = "Código")]
 		public int Id { get; set; }
 		[Required]
-		[StringLength(8)]
 		[RegularExpression(@"[0-9]+")]
 		public int dni { get; set;}
 		[Required]

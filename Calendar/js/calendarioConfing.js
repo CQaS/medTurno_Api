@@ -133,7 +133,7 @@ function selectMed()
       var listmed = document.getElementById("listmed");
       Select = listmed.options[listmed.selectedIndex].value;
       sessionStorage.setItem("seleccionado", Select);
-      location.href = 'http://localhost/medTurno/?controller=turno&action=turno';
+      location.href = './?controller=turno&action=turno';
 }
 
 function selectTipo() 
@@ -141,12 +141,12 @@ function selectTipo()
       var listtipo = document.getElementById("listtipo");
       Select = listtipo.options[listtipo.selectedIndex].value;
       sessionStorage.setItem("seleccionado", Select);
-      location.href = 'http://localhost/medTurno/?controller=turno&action=turno';
+      location.href = './?controller=turno&action=turno';
 }
 
 function traerTurnos()
 {
-    return 'http://localhost/medTurno/turnos.php?accion=' + medSelec;
+    return './turnos.php?accion=' + medSelec;
 }
 
 function alerta()
@@ -169,8 +169,20 @@ $('#btnAgregar').click(function()
 
 $('#btnEliminar').click(function()
 {
-    leerDatos();
-    enviarInfo('eliminar',NuevoEvento);
+    swal({
+        title : "MedTurno informa!",
+        text : "Se eliminara definitivamente, seguro?",
+        icon: "warning",
+        buttons : true
+    })
+    .then((borrar) => 
+    {
+        if (borrar) 
+        {
+            leerDatos();
+            enviarInfo('eliminar',NuevoEvento);
+        }
+    });
 
 });
 
@@ -216,7 +228,19 @@ function enviarInfo(accion, objEvento)
                 $('#calendarioweb').fullCalendar('refetchEvents');
                 var abm = document.getElementById('abm');
                 abm.style.display = "";
-                alert('Turno agregado con Exito');
+                //alert('Turno agregado con Exito');
+                if(accion == 'eliminar')
+                {
+                    swal({ text: "Se dio de baja con Exito!", });
+                }
+                if(accion == 'modificar')
+                {
+                    swal({ text: "Se modifico con Exito!", });
+                }
+                if(accion == 'agregar')
+                {
+                    swal({ text: "Se agrego con Exito!", });
+                }
             }   
             else
             {

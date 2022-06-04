@@ -14,29 +14,20 @@ namespace medTurno_Api.Models
         [Display(Name = "Fecha de Alta")]
         public string fechaSolicitud { get; set; }
         [Required]
-        [NotMapped]
         [Display(Name = "Fecha Solicitada")]
         public string start { get; set; } 
         public string end { get; set; }
         [Required]
-        [NotMapped]
         [Display(Name = "Descripcion")]  
         public string descripcion { get; set; }
-        
-        [NotMapped]
         public string color { get; set; }
-        
-        [NotMapped]
         [Display(Name = "Razon")]
         public string title { get; set; }
         [Required]
-        [NotMapped]
         public int idPrestador { get; set; }
         [Required]
-        [NotMapped]
         public int idDoctor { get; set; }
         [Required]
-        [NotMapped]
         public int idUsuario {get; set;} 
         [Display(Name = "Estado")]
         public int estado { get; set; }

@@ -178,7 +178,7 @@ namespace medTurno_Api.ApiController
         // POST api/<controller>/5
         [HttpPost("login")]
         [AllowAnonymous]
-        public async Task<IActionResult> Login([FromBody]LoginView loginView)
+        public async Task<IActionResult> Login([FromForm]LoginView loginView)
         {
             try
             {

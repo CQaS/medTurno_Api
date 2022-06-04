@@ -30,21 +30,13 @@ namespace medTurno_Api.ApiController
             try
             {
                 var usuario = User.Identity.Name;
+                var usLog = await _context.Usuario.SingleOrDefaultAsync(x => x.Mail == usuario);
+                
                 var res = await _context.Turnos
                                         .Include(e => e.doctor)
                                         .Include(e => e.usuario)
-                                        .Where(e => e.doctor.id == e.idDoctor)
-                                        /* .Select(x => new 
-                                        { 
-                                           x.Id, x.estado, x.start, x.doctor.nombre
-                                        }) */
+                                        .Where(e => e.usuario.Id == usLog.Id)
                                         .ToListAsync();
-
-                                        
-                        // var pagos = await applicationDbContext.Pago
-                        //                         .Include(x=>x.Contrato)
-                        //                         .Where(x => x.ContratoId == id)
-                        //                         .ToListAsync();
                                        
 
                 return Ok(res);
@@ -87,14 +79,19 @@ namespace medTurno_Api.ApiController
 
         // POST api/<TurnoController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromForm] Turno turno)
+        public async Task<IActionResult> Post(Turno turno)
         {
             try
             {
-                turno.title = "Solicitado por Paciente";
+                var usuario = User.Identity.Name;
+                var usLog = await _context.Usuario.SingleOrDefaultAsync(x => x.Mail == usuario);
+
+                turno.title = "Solicitado por Paciente en APP";
                 turno.end = turno.start;
+                turno.idPrestador = usLog.idPrestador;
+                turno.idUsuario = usLog.Id;
                 turno.color = "#5b5be2"; //pendiente
-                turno.estado = 2;
+                turno.estado = 2; //pendiente
 
                 if (ModelState.IsValid)
                 {
@@ -111,8 +108,8 @@ namespace medTurno_Api.ApiController
             }
         }
 
-    // PUT = UPDATE api/<TurnoController>/5
-    [HttpPut("{id}")]
+        // PUT = UPDATE api/<TurnoController>/5
+        [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, Turno turno)
         {
             try
