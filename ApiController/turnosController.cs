@@ -34,8 +34,7 @@ namespace medTurno_Api.ApiController
                 
                 var res = await _context.Turnos
                                         .Include(e => e.doctor)
-                                        .Include(e => e.usuario)
-                                        .Where(e => e.usuario.Id == usLog.Id)
+                                        .Where(e => e.idUsuario == usLog.Id)
                                         .ToListAsync();
                                        
 
@@ -92,6 +91,7 @@ namespace medTurno_Api.ApiController
                 turno.idUsuario = usLog.Id;
                 turno.color = "#5b5be2"; //pendiente
                 turno.estado = 2; //pendiente
+                turno.fechaSolicitud = DateTime.Now.ToString("yyyy-MM-dd");
 
                 if (ModelState.IsValid)
                 {

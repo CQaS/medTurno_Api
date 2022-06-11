@@ -99,6 +99,7 @@ namespace medTurno_Api.Models
                 using (MySqlCommand command = new MySqlCommand(sql, connection))
                 {
                     command.Parameters.Add("@idTurno", MySqlDbType.Int32).Value = id;
+                    command.CommandType = System.Data.CommandType.Text;
                     connection.Open();
                     var reader = command.ExecuteReader();
 

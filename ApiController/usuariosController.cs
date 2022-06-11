@@ -117,6 +117,17 @@ namespace medTurno_Api.ApiController
                 
                 if ((ModelState.IsValid) && (res != null))
                 {
+                    if(u.password != res.password)
+                    {
+                        string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                                password: u.password,
+                                salt: System.Text.Encoding.ASCII.GetBytes(config["Salt"]),
+                                prf: KeyDerivationPrf.HMACSHA1,
+                                iterationCount: 1000,
+                                numBytesRequested: 256 / 8));
+                        u.password = hashed;
+                    }
+
                     _context.Usuario.Update(u);
                     await _context.SaveChangesAsync();
                     
