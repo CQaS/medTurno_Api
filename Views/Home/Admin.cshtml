@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Index Admin";
     List<Turno> turnoEstado = ViewData[nameof(Turno)] as List<Turno>;
+    List<Doctor> doctor = ViewData[nameof(Doctor)] as List<Doctor>;
     int id = ViewBag.id;
 }
 
@@ -49,7 +50,7 @@
                 <li>
                     <a asp-controller="Doctor" asp-action="Alta">
                         <span class="icon"><ion-icon name="medkit-outline"></ion-icon></span>
-                        <span class="titulo">Alta Profecionales</span>
+                        <span class="titulo">Alta Profesionales</span>
                     </a>
                 </li>
                 <li>
@@ -144,7 +145,7 @@
                                 Lista
                             </div>
                             <div class="cardnombre" style="margin-left: -10px;">
-                                Profecionales
+                                Profesionales
                             </div>
                         </div>
                         <div class="iconbox">
@@ -197,29 +198,18 @@
                   <!-- nuevos -->
                   <div class="nuevos">
                       <div class="cardheader">
-                        <h2>Nuevos....</h2>
+                        <h2>Nuevos Profesionales</h2>
                       </div>
                       <table>
+
+                        @foreach (var item in doctor)
+                        {
                           <tr>
-                            <td width="60px"><div class="imgbox"><img src="~/img/avatars/Empleado.png" alt="" srcset=""></div></td>
-                            <td><h4>Ines <br><span>BsAs</span></h4></td>
+                            <td width="60px"><div class="imgbox"><a href="/Doctor/Editar/@Html.DisplayFor(modelItem => item.id)" style="text-decoration: none;"><img src="~/img/avatars/Empleado.png" alt="" srcset=""></a></div></td>
+                            <td><h4>Profesional<br> @Html.DisplayFor(modelItem => item.nombre) <br><span>@Html.DisplayFor(modelItem => item.especialidad.tipo)</span></h4></td>
                           </tr>
-                          <tr>
-                            <td width="60px"><div class="imgbox"><img src="~/img/avatars/Empleado.png" alt="" srcset=""></div></td>
-                            <td><h4>Ines <br><span>BsAs</span></h4></td>
-                        </tr>
-                        <tr>
-                            <td width="60px"><div class="imgbox"><img src="~/img/avatars/Empleado.png" alt="" srcset=""></div></td>
-                            <td><h4>Ines <br><span>BsAs</span></h4></td>
-                        </tr>
-                        <tr>
-                            <td width="60px"><div class="imgbox"><img src="~/img/avatars/Empleado.png" alt="" srcset=""></div></td>
-                            <td><h4>Ines <br><span>BsAs</span></h4></td>
-                        </tr>
-                        <tr>
-                            <td width="60px"><div class="imgbox"><img src="~/img/avatars/Empleado.png" alt="" srcset=""></div></td>
-                            <td><h4>Ines <br><span>BsAs</span></h4></td>
-                        </tr>
+                        }
+
                       </table>
                   </div>
               </div>

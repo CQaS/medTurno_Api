@@ -31,7 +31,7 @@ namespace medTurno_Api.ApiController
             {
                 var res = await _context.Doctor.OrderBy(a => a.nombre)
                                                 .Include(x => x.especialidad)
-                                                .Where(x => x.idEspecialidad == x.especialidad.id)
+                                                .Where(x => x.idEspecialidad == x.especialidad.id && x.estado != 0)
                                                 .Select(a => new 
                                                 { 
                                                     a.id, a.nombre, a.matricula, a.horarioatencion, a.especialidad.especialidad

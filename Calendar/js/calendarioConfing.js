@@ -23,7 +23,7 @@ $(document).ready(
                 center:'title',
                 right:'month,basicWeek,basicDay,agendaWeek,agendaDay,next'
             },
-            customButtons:
+            /* customButtons:
             {
                 Miboton:
                 {
@@ -33,7 +33,7 @@ $(document).ready(
                         alerta();
                     }
                 },
-            },
+            }, */
             eventLimit: true,
             dayClick:function(date, jsEvent, view)
             {

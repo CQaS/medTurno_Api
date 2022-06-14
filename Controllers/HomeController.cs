@@ -14,12 +14,14 @@ namespace medTurno_Api.Controllers
     public class HomeController : Controller
     {
         private readonly RepositorioTurno repositorioTurno;
+        private readonly RepositorioDoctor repositorioDoctor;
         private readonly IWebHostEnvironment environment;
         private readonly ILogger<HomeController> _logger;
         
         public HomeController(ILogger<HomeController> logger, IWebHostEnvironment environment, IConfiguration config)
         {
             this.environment = environment;
+            this.repositorioDoctor = new RepositorioDoctor(config);
             this.repositorioTurno = new RepositorioTurno(config);          
             _logger = logger;
         }
@@ -29,7 +31,7 @@ namespace medTurno_Api.Controllers
             return View();
         }
 
-        [Route("Administracion", Name = "Admin")]
+        
         public IActionResult Admin(int? id)
         {
             if(id == null)
@@ -45,6 +47,8 @@ namespace medTurno_Api.Controllers
 
                 ViewBag.Mensaje= TempData["Mensaje"];
                 ViewBag.Error= TempData["Error"];
+                var ltaP = repositorioDoctor.obtener();
+                ViewData[nameof(Doctor)] = ltaP;
                 var lta = repositorioTurno.ObtenerPorEstado();
                 ViewData[nameof(Turno)] = lta;
                 Turno t = new Turno();
@@ -68,6 +72,8 @@ namespace medTurno_Api.Controllers
                 ViewBag.Error= TempData["Error"];
                 var lta = repositorioTurno.ObtenerPorEstado();
                 ViewData[nameof(Turno)] = lta;
+                var ltaP = repositorioDoctor.obtener();
+                ViewData[nameof(Doctor)] = ltaP;
                 Turno t = repositorioTurno.obtenerPorIdTurno(id);
                 ViewBag.p = t.usuario.nombre;        
                 return View(t);

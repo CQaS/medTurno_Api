@@ -43,7 +43,7 @@
                             <td>@Html.DisplayFor(modelItem => item.especialidad.tipo) - @Html.DisplayFor(modelItem => item.matricula)</td>
                             <td>@Html.DisplayFor(modelItem => item.horarioatencion)</td>
                             <td><a href="/Doctor/Editar/@Html.DisplayFor(modelItem => item.id)" style="text-decoration: none;"><ion-icon name="create" style="font-size: 35px; margin-left: 15px; color: white"></ion-icon></a></td>
-                            <td style="background: #adb5bd;">
+                            <td style="background: #adb5bd;">   
                                 <a onclick=Delete("/Doctor/Delete/@Html.DisplayFor(modelItem => item.id)") class="btn btn-danger text-white" style="cursor: pointer; background-color: #495057;">
                                 <ion-icon name="trash-outline" style="font-size: 25px;color: white;padding:5px;"></ion-icon>
                                 </a>

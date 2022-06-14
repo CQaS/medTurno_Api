@@ -28,7 +28,7 @@
     </div>
 
     <div class="btnadmin">
-      <a href="http://localhost:5000/Administracion" class="btn btn-primary">Home - Admin</a>
+      <a href="http://localhost:5000/Home/Admin" class="btn btn-primary">Home - Admin</a>
     </div>
     <h4 id="tur">
       <span>med</span>

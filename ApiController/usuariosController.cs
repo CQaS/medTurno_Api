@@ -38,7 +38,7 @@ namespace medTurno_Api.ApiController
             {
                 var usuario = User.Identity.Name;
 
-                return await _context.Usuario.SingleOrDefaultAsync(x => x.Mail == usuario);
+                return await _context.Usuario.SingleOrDefaultAsync(x => x.Mail == usuario && x.estado != 0);
 
             }
             catch (Exception ex)
@@ -200,7 +200,7 @@ namespace medTurno_Api.ApiController
                     iterationCount: 1000,
                     numBytesRequested: 256 / 8));
                 
-                var p = await _context.Usuario.FirstOrDefaultAsync(x => x.Mail == loginView.Usuario);
+                var p = await _context.Usuario.FirstOrDefaultAsync(x => x.Mail == loginView.Usuario && x.estado != 0);
 
                 if (p == null || p.password != hashed)
                 {

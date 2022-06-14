@@ -34,7 +34,7 @@ namespace medTurno_Api.ApiController
                 
                 var res = await _context.Turnos
                                         .Include(e => e.doctor)
-                                        .Where(e => e.idUsuario == usLog.Id)
+                                        .Where(e => e.idUsuario == usLog.Id && e.estado != 0)
                                         .ToListAsync();
                                        
 
@@ -109,31 +109,20 @@ namespace medTurno_Api.ApiController
         }
 
         // PUT = UPDATE api/<TurnoController>/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, Turno turno)
+        [HttpPut]
+        public async Task<IActionResult> Put(int id)
         {
             try
             {
-                var usuario = User.Identity.Name;
+                var turno = await _context.Turnos.SingleOrDefaultAsync(x => x.Id == id);
+                turno.estado = 0;
                                         
                 if (ModelState.IsValid)
                 {
-                    turno.Id = id;
                     _context.Turnos.Update(turno);
                     await _context.SaveChangesAsync();
 
-                    var cambios = await _context.Turnos
-                                    .Include(e => e.usuario)
-                                    .Where(e => e.usuario.Mail == usuario 
-                                            && e.Id == id
-                                    )
-                                    .Select(x => new 
-                                    { 
-                                        x.Id, x.estado, x.start, x.doctor.nombre
-                                    })
-                                    .ToListAsync();
-
-                    return Ok(cambios);
+                    return Ok("OK");
                 }
                 
                 return BadRequest();
@@ -142,12 +131,6 @@ namespace medTurno_Api.ApiController
             {
                 return BadRequest(ex);
             }
-        }
-
-        // DELETE api/<PagoController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

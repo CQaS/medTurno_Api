@@ -40,7 +40,7 @@ namespace medTurno_Api.Controllers
         }
 
         // GET: Usuario
-        [Authorize(Policy = "Administrador")]
+        [Authorize]
         [Route("Listar_Pacientes", Name = "Listar_p")]
         public ActionResult Index()
         {
@@ -207,7 +207,7 @@ namespace medTurno_Api.Controllers
         // POST: Usuario/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Policy = "Administrador")]
         public ActionResult Editar(int id, Usuario u)
         {
             //var vista = "Editar";
@@ -338,6 +338,13 @@ namespace medTurno_Api.Controllers
                         numBytesRequested: 256 / 8));
 
                     var e = repositorioUsuario.ObtenerPorEmail(login.Usuario);
+                        
+                        if (e.Rol == 3 || e.Rol == 4)
+                        {
+                            TempData["Mensaje"] = "No tienes permiso de ingreso.";
+                            ViewBag.Error= TempData["Mensaje"];
+                            return View();
+                        }
 
                     if(String.IsNullOrEmpty(login.Pregunta))
                     {
