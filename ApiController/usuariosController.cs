@@ -38,7 +38,9 @@ namespace medTurno_Api.ApiController
             {
                 var usuario = User.Identity.Name;
 
-                return await _context.Usuario.SingleOrDefaultAsync(x => x.Mail == usuario && x.estado != 0);
+                return await _context.Usuario
+                            .Include(x => x.direccion)
+                            .SingleOrDefaultAsync(x => x.Mail == usuario && x.estado != 0);
 
             }
             catch (Exception ex)

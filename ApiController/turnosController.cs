@@ -110,12 +110,12 @@ namespace medTurno_Api.ApiController
 
         // PUT = UPDATE api/<TurnoController>/5
         [HttpPut]
-        public async Task<IActionResult> Put(int id)
+        public async Task<IActionResult> Put(Turno turno)
         {
             try
             {
-                var turno = await _context.Turnos.SingleOrDefaultAsync(x => x.Id == id);
-                turno.estado = 0;
+                /* var turno = await _context.Turnos.SingleOrDefaultAsync(x => x.Id == id);
+                turno.estado = 0; */
                                         
                 if (ModelState.IsValid)
                 {
