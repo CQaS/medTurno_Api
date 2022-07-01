@@ -21,7 +21,7 @@ namespace medTurno_Api.Models
             var res = new List<Especialidad>();
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                string sql = $"SELECT id, tipo, especialidad FROM especialidad";
+                string sql = $"SELECT id, tipo, especialidad FROM especialidad where estado = 1";
                 using (MySqlCommand command = new MySqlCommand(sql, connection))
                 {
                     connection.Open();
@@ -47,7 +47,7 @@ namespace medTurno_Api.Models
             Especialidad esp;
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                string sql = $"SELECT e.id, e.tipo, e.especialidad FROM especialidad e WHERE e.id = @id";
+                string sql = $"SELECT e.id, e.tipo, e.especialidad FROM especialidad e WHERE e.id = @id AND estado = 1";
                 using (MySqlCommand command = new MySqlCommand(sql, connection))
                 {
                     command.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
@@ -116,6 +116,25 @@ namespace medTurno_Api.Models
             }
             return i;
         }
+
+        public int Verificar(int idEspecialidad)
+        {
+            var ccontar = 0;
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                string sql_ID = $"SELECT COUNT(d.id) FROM especialidad e JOIN doctor d ON e.id = d.idEspecialidad WHERE e.id = @idEspecialidad AND d.estado NOT IN(0)";                
+                using (var command = new MySqlCommand(sql_ID, connection))
+                {
+                    command.Parameters.Add("@idEspecialidad", MySqlDbType.UInt32);
+                    command.Parameters["@idEspecialidad"].Value = idEspecialidad;
+                    connection.Open();
+                    ccontar = Convert.ToInt32(command.ExecuteScalar());
+                    connection.Close();
+                }
+            }
+            return ccontar;
+        }
+
 
         public int Borrar(int idE)
         {

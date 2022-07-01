@@ -117,8 +117,16 @@ namespace medTurno_Api.Controllers
         {
             try
             {
-                repositorioEspecialidad.Borrar(id);
-                return Json(new { success = true, menssage = "Especialidad dada de baja con Exito!" });
+                var idVerificado = repositorioEspecialidad.Verificar(id);
+                if(idVerificado == 0)
+                {
+                    repositorioEspecialidad.Borrar(id);
+                    return Json(new { success = true, menssage = "Especialidad dada de baja con Exito!" });
+                }
+                else
+                {
+                    return Json(new { success = false, menssage = "Algo fallo, contacta a Admin!"});
+                }
 
             }
             catch (Exception ex)

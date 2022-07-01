@@ -19,6 +19,7 @@ namespace medTurno_Api.Models
         [Required]
         [Display(Name = "Especialidad Medica")]
         public string especialidad { get; set; }
+        public int estado { get; set; }
         
     }
 }

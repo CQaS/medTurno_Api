@@ -121,6 +121,24 @@ namespace medTurno_Api.Models
             return i;
         }
 
+        public int Verificar(int idPrestador)
+        {
+            var ccontar = 0;
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                string sql_ID = $"SELECT COUNT(u.id) FROM prestador p JOIN usuario u ON p.id = u.idprestador WHERE p.id = @idPrestador AND u.estado NOT IN(0)";                
+                using (var command = new MySqlCommand(sql_ID, connection))
+                {
+                    command.Parameters.Add("@idPrestador", MySqlDbType.UInt32);
+                    command.Parameters["@idPrestador"].Value = idPrestador;
+                    connection.Open();
+                    ccontar = Convert.ToInt32(command.ExecuteScalar());
+                    connection.Close();
+                }
+            }
+            return ccontar;
+        }
+
         public int Borrar(int idPrestador)
         {
             var i = 0;

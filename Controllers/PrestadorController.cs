@@ -134,8 +134,17 @@ namespace medTurno_Api.Controllers
         {
             try
             {
-                repositorioPrestador.Borrar(id);
-                return Json(new { success = true, menssage = "Prestador dado de baja con Exito!" });
+                var idVerificado = repositorioPrestador.Verificar(id);
+                if(idVerificado == 0)
+                {
+                    repositorioPrestador.Borrar(id);
+                    return Json(new { success = true, menssage = "Prestador dado de baja con Exito!" }); 
+                }
+                else
+                {
+                    return Json(new { success = false, menssage = "Algo fallo, contacta a Admin!"});
+                }
+                
 
             }
             catch (Exception ex)
