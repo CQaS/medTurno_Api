@@ -17,12 +17,49 @@ namespace medTurno_Api.Models
 
         }
         
-        public List<Turno> obtenerHoy()
+        public List<Turno> obtenerTodos()
         {
             var res = new List<Turno>();
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 string sql = $"SELECT t.id, t.start, t.title, d.nombre, u.nombre FROM turnos t JOIN doctor d ON t.idDoctor = d.id JOIN usuario u ON u.id = t.idUsuario WHERE t.estado NOT IN(0, 3, 4) ORDER BY d.nombre";
+                
+                using (MySqlCommand command = new MySqlCommand(sql, connection))
+                {
+                    connection.Open();
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        var e = new Turno
+                        {
+                            Id = reader.GetInt32(0),
+                            start = reader.GetString(1),
+                            title = reader.GetString(2),
+                            doctor = new Doctor
+                            {
+                                nombre = reader.GetString(3),
+                            },
+                            usuario = new Usuario
+                            {
+                                nombre = reader.GetString(4),
+                            },
+                            
+                        };
+                        res.Add(e);
+                    }
+                    connection.Close();
+                }
+            }
+            return res;
+        }
+
+        public List<Turno> obtenerHoy()
+        {
+            var res = new List<Turno>();
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                string sql = $"SELECT t.id, t.start, t.title, d.nombre, u.nombre FROM turnos t JOIN doctor d ON t.idDoctor = d.id JOIN usuario u ON u.id = t.idUsuario WHERE t.estado NOT IN(0, 3, 4) AND (SELECT DATE_FORMAT(NOW(), '%Y-%m-%d')) = (SELECT DATE_FORMAT(t.start, '%Y-%m-%d')) ORDER BY d.nombre";
+
                 using (MySqlCommand command = new MySqlCommand(sql, connection))
                 {
                     connection.Open();

@@ -30,12 +30,6 @@
                     </a>
                 </li>
                 <li>
-                    <a asp-controller="Turno" asp-action="Index">
-                        <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
-                        <span class="titulo">Listar Turnos</span>
-                    </a>
-                </li>
-                <li>
                     <a asp-controller="Especialidad" asp-action="Index">
                         <span class="icon"><ion-icon name="document-attach-outline"></ion-icon></span>
                         <span class="titulo">Lista Especialidad</span>
@@ -57,6 +51,12 @@
                     <a asp-controller="Prestador" asp-action="Alta">
                         <span class="icon"><ion-icon name="pulse-outline"></ion-icon></span>
                         <span class="titulo">Alta O.Social</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Prestador" asp-action="Index">
+                        <span class="icon"><ion-icon name="pulse-outline"></ion-icon></span>
+                        <span class="titulo">Listar O.Social</span>
                     </a>
                 </li>
                 <li>
@@ -123,18 +123,18 @@
                         </div>
                     </div>
                 </a>
-                <a asp-controller="Prestador" asp-action="Index" style="text-decoration: none;">
+                <a asp-controller="Turno" asp-action="Hoy" style="text-decoration: none;">
                     <div class="card">
                         <div>
                             <div class="num">
                                 Lista
                             </div>
                             <div class="cardnombre">
-                                O.Social
+                                Turnos Hoy
                             </div>
                         </div>
                         <div class="iconbox">
-                            <ion-icon name="pulse-outline"></ion-icon>
+                            <ion-icon name="calendar-outline"></ion-icon>
                         </div>
                     </div>
                 </a>

@@ -36,7 +36,7 @@ class admin extends dbConfig
         {
                 try
                 {
-                        $query = $this->connect()->prepare("SELECT id, nombre From doctor WHERE estado = '1'");
+                        $query = $this->connect()->prepare("SELECT d.id, d.nombre, e.tipo From doctor d JOIN especialidad e ON d.idEspecialidad = e.id WHERE d.estado = '1'");
                         $query->execute();
                         $res = $query->fetchAll(PDO::FETCH_ASSOC);
 

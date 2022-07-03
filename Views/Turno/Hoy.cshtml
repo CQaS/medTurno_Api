@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<medTurno_Api.Models.Turno>
 
 @{
-    ViewData["Title"] = "Index Turnos";
+    ViewData["Title"] = "Turnos Hoy";
     List<Turno> turno = ViewData[nameof(Turno)] as List<Turno>;
 }
 
@@ -17,7 +17,7 @@
       <section>
           <div class="box">
             <a asp-controller="Home" asp-action="Admin" class="btn btn-primary" style="float: right; position: relative;">Administracion</a>
-            <h3>Lista de Turnos hoy</h3>
+            <h3>Lista de Turnos para hoy</h3>
             <hr>
 
             <table id="listas" class="display" style="width:100%">

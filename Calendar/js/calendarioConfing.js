@@ -302,7 +302,7 @@ function limpiarForm()
 function validateForm()
 {
     var error = false;
-    var rango = /^[A-Za-z0-9]+$/;
+    var rango = /^(?!\s)[A-Za-z0-9\s]+$/;
     
     var title  = $('#txtTitulo').val()
     var descripcion  = $('#txtDesc').val()

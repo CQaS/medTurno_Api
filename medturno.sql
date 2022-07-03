@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-05-2022 a las 19:26:44
+-- Tiempo de generación: 03-07-2022 a las 02:08:13
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.2
 
@@ -51,7 +51,8 @@ INSERT INTO `direccion` (`id`, `calle`, `numero`, `ciudad`, `estado`) VALUES
 (9, 'Legislatura', 22, 'san luis', 1),
 (10, 'acanomas', 34, 'san luis', 1),
 (11, 'sin direccion', 0, 'sin direccion', 0),
-(12, 'Centenario', 96, 'San Luis', 1);
+(12, 'Centenario', 96, 'San Luis', 1),
+(13, 'Mundial 78', 101, 'Merlo', 1);
 
 -- --------------------------------------------------------
 
@@ -78,7 +79,7 @@ INSERT INTO `doctor` (`id`, `nombre`, `matricula`, `horarioatencion`, `idEspecia
 (3, 'Dra. Aime Paula', 'M.P. 034', 'Lun: 20 - 22hs', 3, 1),
 (4, 'Dra. Moran Leticia', 'M.P. 2367', 'Lun a Vie: 15 - 21hs', 5, 1),
 (5, 'Dr. Tamashiro Ohiro', 'M.P. 19453', 'Lun: 14 - 18hs. Mar: 14 - 18hs. jue: 17 - 20hs', 4, 1),
-(6, 'Dr. Molina Campos', 'M.P. 0001', 'Lun a Vie: 09.30 - 13hs', 6, 1),
+(6, 'Dr. Molina Campos', 'M.P. 0001', 'Lun a Vie: 09.30 - 13hs', 6, 0),
 (7, 'Lic. Calderon Andrada', 'M.P. 4545', 'Jue: 14 - 18hs', 7, 1),
 (8, 'Dra. Moran Viviana', 'M.N. 64899', 'Jue: 14 - 21hs', 6, 1);
 
@@ -91,22 +92,23 @@ INSERT INTO `doctor` (`id`, `nombre`, `matricula`, `horarioatencion`, `idEspecia
 CREATE TABLE `especialidad` (
   `id` int(11) NOT NULL,
   `tipo` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
-  `especialidad` varchar(100) COLLATE utf8_spanish_ci NOT NULL
+  `especialidad` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `estado` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `especialidad`
 --
 
-INSERT INTO `especialidad` (`id`, `tipo`, `especialidad`) VALUES
-(1, 'Odontologia', 'Ortodoncia'),
-(2, 'Cardiologo', 'Coronario'),
-(3, 'Medicina General', 'Medicina Familiar'),
-(4, 'Traumatologia', 'Ortopedia'),
-(5, 'Medicina General', 'Cronicos'),
-(6, 'Psicologia', 'Atencio infantil'),
-(7, 'Ginecología', 'Tocoginecología'),
-(8, 'Odontologia', 'Ortodoncia');
+INSERT INTO `especialidad` (`id`, `tipo`, `especialidad`, `estado`) VALUES
+(1, 'Odontologia', 'Ortodoncia', 1),
+(2, 'Cardiologia', 'Coronario', 1),
+(3, 'Medicina General', 'Medicina Familiar', 1),
+(4, 'Traumatologia', 'Ortopedia', 1),
+(5, 'Medicina General', 'Cronicos', 1),
+(6, 'Psicologia', 'Atencio infantil', 1),
+(7, 'Ginecología', 'Tocoginecología', 1),
+(9, 'Cargiologia', 'Deportistas', 1);
 
 -- --------------------------------------------------------
 
@@ -127,7 +129,6 @@ CREATE TABLE `prestador` (
 --
 
 INSERT INTO `prestador` (`id`, `nombre`, `direccion`, `telefono`, `estado`) VALUES
-(1, 'OBRA SOCIAL DEL PERSONAL DE LA ACTIVIDAD AZUCARERA TUCUMANA', 'CONGRESO DE TUCUMAN 341 | SAN MIGUEL DE TUCUMAN', 800123456, 1),
 (2, 'Sin Prestador', 'Sin Prestador', 0, 0),
 (7, 'OBRA SOCIAL DEL PERSONAL DE LA ACTIVIDAD AZUCARERA TUCUMANA', 'CONGRESO DE TUCUMAN 341 | SAN MIGUEL DE TUCUMAN', 800123456, 1),
 (8, 'OBRA SOCIAL DEL PERSONAL DE PANADERIAS Y AFINES', 'BOEDO 168 | CAPITAL FEDERAL - BOEDO(1-400)', 800123456, 1),
@@ -153,7 +154,7 @@ INSERT INTO `prestador` (`id`, `nombre`, `direccion`, `telefono`, `estado`) VALU
 
 CREATE TABLE `turnos` (
   `id` int(11) NOT NULL,
-  `fechaSolicitud` varchar(11) COLLATE utf8_spanish_ci NOT NULL DEFAULT current_timestamp(),
+  `fechaSolicitud` varchar(11) COLLATE utf8_spanish_ci DEFAULT current_timestamp(),
   `start` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `end` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `color` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
@@ -175,7 +176,7 @@ INSERT INTO `turnos` (`id`, `fechaSolicitud`, `start`, `end`, `color`, `descripc
 (2, '2022-03-12 ', '2022-03-04 18:30:00 ', '2022-03-04 18:30:00 ', '#c31432', 'trae RX', '#FFFFFF', 'Su Turno: 1 - Control de Yeso', 17, 5, 6, 0),
 (3, '2022-03-12 ', '2022-03-07 17:20', '2022-03-07 17:20', '#52af52', 'Bracket', '#FFFFFF', 'Su Turno: 1 - Control', 19, 1, 9, 8),
 (4, '2022-03-12 ', '2022-03-07 17:30', '2022-03-07 17:30', '#f5af19', 'Dolor Muela', '#FFFFFF', 'Su Turno: 2 - Arreglo', 13, 1, 8, 3),
-(5, '2022-03-12 ', '2022-03-09 11:05', '2022-03-09 11:05', '#52af52', 'fuerte caida de escalera', '#FFFFFF', 'Su Turno: 1 - Caida', 9, 6, 7, 5),
+(5, '2022-03-12', '2022-03-09 11:05', '2022-03-09 11:05', '#52af52', 'fuerte caida de escalera', '#FFFFFF', 'Su Turno: 1 - Caida', 9, 6, 7, 1),
 (6, '2022-03-12 ', '2022-03-10 09:00', '2022-03-10 09:00', '#ffff0070', 'Dolor lumbar', '#FFFFFF', 'Su Turno: 1 - Dolor', 17, 4, 6, 6),
 (7, '2022-03-12 ', '2022-03-16 16:45', '2022-03-16 16:45', '#52af52', 'Recetas medicamentos', '#FFFFFF', 'Su Turno: 1 - Recetas', 10, 3, 3, 8),
 (8, '2022-03-12 ', '2022-03-27 20:40', '2022-03-27 20:40', '#52af52', 'Ve nublado ojo izquierdo', '#FFFFFF', 'Su Turno: 1 - Ojos', 13, 2, 8, 8),
@@ -187,7 +188,25 @@ INSERT INTO `turnos` (`id`, `fechaSolicitud`, `start`, `end`, `color`, `descripc
 (14, '2022-03-21 ', '2022-03-23 05:50', '2022-03-23 05:50', '#ffff0070', 'Muela de juicio', '#FFFFFF', 'Su Turno: 1 - duelor muela de juicio feo', 10, 1, 3, 6),
 (15, '2022-03-23 ', '2022-03-25 18:30', '2022-03-25 18:30', '#e67e7e', 'Certificado por faltas', '#FFFFFF', 'Su Turno: 1 - Certificado', 16, 3, 11, 7),
 (16, '2022-03-24 ', '2022-03-31 16:20', '2022-03-31 16:20', '#c31432', 'colicos', '#FFFFFF', 'Su Turno: 1 - Digestion lenta', 9, 2, 7, 0),
-(17, '2022-05-30 ', '2022-06-02 18:30', '2022-06-02 18:30', '#c31432', 'dolor', '#FFFFFF', 'Su Turno: 1 - Caries', 20, 1, 12, 0);
+(17, '2022-05-30 ', '2022-06-02 18:30', '2022-06-02 18:30', '#c31432', 'dolor', '#FFFFFF', 'Su Turno: 1 - Caries', 20, 1, 12, 0),
+(18, '2022-05-09', '2022-05-25 14:10', '2022-05-25 14:10', '#c31432', 'me duele el cuello', '#FFFFFF', 'Solicitado por Paciente en api', 9, 1, 7, 0),
+(19, '2022-05-09', '2022-5-16 11:20', '2022-5-16 11:20', '#52af52', 'Mucho Papanato', '#FFFFFF', 'Solicitado por Paciente en api', 9, 8, 7, 8),
+(20, '2022-07-01 ', '2022-07-01 17:25', '2022-07-01 17:25', '#52af52', 'Consulta', '#FFFFFF', 'Su Turno: 1 - Consulta', 10, 1, 3, 8),
+(21, '2022-07-01 ', '2022-07-01 08:00', '2022-07-01 08:00', '#ffff0070', 'Entrega de Analisis', '#FFFFFF', 'Su Turno: 1 - Analisis', 17, 3, 6, 6),
+(22, '2022-07-01 ', '2022-07-04 10:50', '2022-07-04 10:50', '#e03197', 'Control', '#FFFFFF', 'Su Turno: 1 - Control', 9, 4, 7, 1),
+(23, '2022-07-01 ', '2022-07-04 16:00', '2022-07-04 16:00', '#e67e7e', 'Arreglos', '#FFFFFF', 'Su Turno: 1 - Arreglos', 13, 1, 8, 7),
+(24, '2022-07-01 ', '2022-07-04 16:30', '2022-07-04 16:30', '#52af52', 'Bracket', '#FFFFFF', 'Su Turno: 2 - Bracket', 19, 1, 9, 8),
+(25, '2022-07-01 ', '2022-07-04 16:10', '2022-07-04 16:10', '#f5af19', 'Mucho Dolor', '#FFFFFF', 'Su Turno: 3 - Dolor', 20, 1, 12, 3),
+(26, '2022-07-01 ', '2022-07-05 08:00', '2022-07-05 08:00', '#52af52', 'Control yeso', '#FFFFFF', 'Su Turno: 1 - RX', 15, 5, 10, 8),
+(27, '2022-07-01 ', '2022-07-05 08:30', '2022-07-05 08:30', '#ffff0070', 'Caida por escaleras', '#FFFFFF', 'Su Turno: 2 - Caida', 16, 5, 11, 6),
+(28, '2022-07-01 ', '2022-07-05 08:50', '2022-07-05 08:50', '#e67e7e', 'ART Caida en trabajo', '#FFFFFF', 'Su Turno: 3 - Caida', 10, 5, 3, 7),
+(29, '2022-07-01 ', '2022-07-21 18:30', '2022-07-21 18:30', '#e03197', 'Citado por Licenciada', '#FFFFFF', 'Su Turno: 1 - Citado', 13, 7, 8, 1),
+(30, '2022-07-01 ', '2022-07-15 16:00', '2022-07-15 16:00', '#5b5be2', 'Control Bracket', '#FFFFFF', 'Su Turno: 1 - Control', 19, 1, 9, 2),
+(31, '2022-07-01 ', '2022-07-18 18:00', '2022-07-18 18:00', '#ff0000', 'No puede ver ojo derecho', '#FFFFFF', 'Su Turno: 1 - Vision borrosa', 16, 3, 11, 5),
+(32, '2022-07-01 ', '2022-07-29 19:00', '2022-07-29 19:00', '#52af52', 'Control Bracket', '#FFFFFF', 'Su Turno: 1 - Control', 19, 1, 9, 8),
+(33, '2022-07-01 ', '2022-07-26 11:40', '2022-07-26 11:40', '#e03197', 'Citada por Lic', '#FFFFFF', 'Su Turno: 1 - Cita', 17, 7, 6, 1),
+(34, '2022-07-02', '2022-7-4 10:5', '2022-7-4 10:5', '#e03197', 'Dolor de muela', '#FFFFFF', 'Solicitado por Paciente en APP', 26, 3, 13, 1),
+(35, '2022-07-02', '2022-7-5 18:15', '2022-7-5 18:15', '#ff0000', 'Dolor muela', '#FFFFFF', 'Solicitado por Paciente en APP', 26, 1, 13, 5);
 
 -- --------------------------------------------------------
 
@@ -223,12 +242,13 @@ INSERT INTO `usuario` (`id`, `nombre`, `dni`, `fecNac`, `mail`, `telefono`, `ava
 (4, 'Alvarez Laura', 477484, '1970-08-02', 'alvarez@mail.com', 264565, '/img/avatars/Empleado.png', 'Od5l8kFX8vwvOF5BPAZjFy6qbs/5m9WgQzPkKL1TqA8=', 'admin', 2, '2022-03-09 22:10:06', 1, 7, 3),
 (5, 'Rios Roxana', 238343, '1970-08-02', 'rios@mail.com', 2645656, '/img/avatars/Empleado.png', 'Od5l8kFX8vwvOF5BPAZjFy6qbs/5m9WgQzPkKL1TqA8=', 'admin', 2, '2022-03-09 22:10:06', 1, 12, 4),
 (6, 'Nadal Nuria', 923746, '1999-08-02', 'nadal@mail.com', 2645656, '/img/avatars/person.png', 'Od5l8kFX8vwvOF5BPAZjFy6qbs/5m9WgQzPkKL1TqA8=', 'admin', 3, '2022-03-09 22:10:06', 1, 17, 5),
-(7, 'Zelada Sara', 4137422, '1987-08-02 00:00:00.000000', 'zelada@mail.com', 2645656, '/img/avatars/person.png', 'Od5l8kFX8vwvOF5BPAZjFy6qbs/5m9WgQzPkKL1TqA8=', 'admin', 3, '2022-03-09 22:10:06', 1, 9, 6),
+(7, 'Zelada Sarita', 413742, '1987-08-02 00:00:00.000000', 'zelada@mail.com', 264562066, '/img/avatars/person.png', 'Od5l8kFX8vwvOF5BPAZjFy6qbs/5m9WgQzPkKL1TqA8=', 'admin', 3, '2022-03-09 22:10:06', 1, 9, 6),
 (8, 'Cuello Exequiel', 28346, '1995-08-02', 'cuello@mail.com', 2645656, '/img/avatars/person.png', 'Od5l8kFX8vwvOF5BPAZjFy6qbs/5m9WgQzPkKL1TqA8=', 'admin', 3, '2022-03-09 22:10:06', 1, 13, 7),
 (9, 'Bustos Marina', 287499, '1979-08-02', 'bustoa@mail.com', 2645656, '/img/avatars/person.png', 'Od5l8kFX8vwvOF5BPAZjFy6qbs/5m9WgQzPkKL1TqA8=', 'admin', 3, '2022-03-09 22:10:06', 1, 19, 8),
 (10, 'Varas Pamela', 27777777, '2022-03-16 00:00:00', 'varas@mail.com', 343434, '/img/avatars/person.png', 'P1UvNMCPWaLd9qWd7h9NJ7OiwxU/aIuRBFuCvooTcu8=', 'varas', 3, '2022-03-15 23:12:10', 1, 15, 9),
 (11, 'Muñoz Euge', 343434, '2022-03-08 00:00:00', 'euge@mail.com', 34343434, '/img/avatars/person.png', 'lO6UGKp8xfFllZf/csDS3NGaCD55HOwKjTr/gp9KW3M=', 'euge', 3, '2022-03-20 22:57:27', 1, 16, 10),
-(12, 'Fernandez Hernan', 3567890, '2022-03-08 00:00:00', 'fhernan@mail.com', 433553, '/img/avatars/person.png', '1t7FbYPIp3sxG0SnP1bDMGrbsUo+TW9K2B62iiHi1Yw=', 'hernan', 3, '2022-03-28 21:09:04', 1, 20, 12);
+(12, 'Fernandez Hernan', 3567890, '2022-03-08 00:00:00', 'fhernan@mail.com', 433553, '/img/avatars/person.png', '1t7FbYPIp3sxG0SnP1bDMGrbsUo+TW9K2B62iiHi1Yw=', 'hernan', 3, '2022-03-28 21:09:04', 1, 20, 12),
+(13, 'Lemos Luis', 37373737, '2018-08-14 00:00:00', 'lemos@mail.com', 266456678, '/img/avatars/person.png', 'zFMyc8TZoJQy6aCOex487m4I/WtiBRUzELOD3P0RwEo=', 'lemos', 3, '2022-07-02 16:40:29', 1, 26, 13);
 
 --
 -- Índices para tablas volcadas
@@ -284,7 +304,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `direccion`
 --
 ALTER TABLE `direccion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `doctor`
@@ -296,7 +316,7 @@ ALTER TABLE `doctor`
 -- AUTO_INCREMENT de la tabla `especialidad`
 --
 ALTER TABLE `especialidad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `prestador`
@@ -308,13 +328,13 @@ ALTER TABLE `prestador`
 -- AUTO_INCREMENT de la tabla `turnos`
 --
 ALTER TABLE `turnos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Restricciones para tablas volcadas

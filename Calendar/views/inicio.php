@@ -123,7 +123,7 @@
                   <?php 
                             foreach (parent::get_listaProfecionales() as $profecional)
                             {
-                                echo "<option value='".$profecional['id']."'>".$profecional['nombre']."</option>";
+                                echo "<option value='".$profecional['id']."'>".$profecional['nombre']." (".$profecional['tipo'].")</option>";
                             }
                           
                   ?>

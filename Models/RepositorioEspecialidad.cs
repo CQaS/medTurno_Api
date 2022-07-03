@@ -21,7 +21,7 @@ namespace medTurno_Api.Models
             var res = new List<Especialidad>();
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                string sql = $"SELECT id, tipo, especialidad FROM especialidad where estado = 1";
+                string sql = $"SELECT id, tipo, especialidad FROM especialidad where estado = 1 ORDER BY tipo";
                 using (MySqlCommand command = new MySqlCommand(sql, connection))
                 {
                     connection.Open();

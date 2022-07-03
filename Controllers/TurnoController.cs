@@ -41,6 +41,16 @@ namespace medTurno_Api.Controllers
         [Route("Listar_Turnos", Name = "Listar_t")]
         public IActionResult Index()
         {
+            var lta = repositorioTurno.obtenerTodos();
+            ViewData[nameof(Turno)] = lta;
+            return View();
+        }
+
+        // GET: 
+        [Authorize]
+        [Route("Listar_Hoy", Name = "Listar_h")]
+        public IActionResult Hoy()
+        {
             var lta = repositorioTurno.obtenerHoy();
             ViewData[nameof(Turno)] = lta;
             return View();
