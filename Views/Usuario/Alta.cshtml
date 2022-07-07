@@ -77,9 +77,12 @@ else
                             <input asp-for="direccion.calle" placeholder="Calle" onkeydown="validar()"/>
                             <span asp-validation-for="direccion.calle" class="text-danger"></span>
                         </div>
-                        <div class="inputbox w50">
-                            <input asp-for="direccion.numero" value="000" placeholder="Numero" onkeydown="validar()"/>
+                        <div class="inputbox w50" style="width: 30%;">
+                            <input asp-for="direccion.numero" value="0" placeholder="Numero" onkeydown="validar()"/>
                             <span asp-validation-for="direccion.numero" class="text-danger"></span>
+                            <label style="position: absolute;color: rgb(249, 247, 252);font-size: 20px;font-weight: 600;margin-left: 10px;">
+                                Numero
+                            </label>
                         </div>
                         <div class="inputbox w50">
                             <input asp-for="direccion.ciudad" placeholder="Ciudad" onkeydown="validar()"/>

@@ -1,7 +1,5 @@
 <?php
 
-//header('Content-Type: aplication/json');
-
 $pdo = new PDO("mysql:dbname=medturno;host=localhost","root","");
 
 if(isset($_GET['accion']))

@@ -91,8 +91,9 @@ namespace medTurno_Api.Controllers
                 }
                 {
                     var user = repositorioUsuario.ObtenerPorEmail(u.Mail);
+                    var userD = repositorioUsuario.ObtenerPorDni(u.dni);
 
-                    if (user == null )
+                    if (user == null && userD == null)
                     {
                         int idDeLaDireccion;
                         if(u.idDireccion > 0)
@@ -156,7 +157,7 @@ namespace medTurno_Api.Controllers
                     }
                     else
                     {
-                        TempData["Mensaje"] = "El Email o Usuario ingresado ya se encuentra registrado en el sistema!";
+                        TempData["Mensaje"] = "El Email o Usuario y/o DNI ingresado ya se encuentra registrado en el sistema!";
                         ViewBag.Error = TempData["Mensaje"];
                         ViewBag.Roles = Usuario.ObtenerRoles();
                         var prestador = repositorioPrestador.obtener();
@@ -369,7 +370,7 @@ namespace medTurno_Api.Controllers
                             CookieAuthenticationDefaults.AuthenticationScheme,
                             new ClaimsPrincipal(claimsIdentity));
 
-                        repositorioUsuario.session(login.Usuario);
+                        repositorioUsuario.session(e.nombre);
 
                         return RedirectToAction(nameof(Index), "Home");
                     }

@@ -34,6 +34,7 @@ namespace medTurno_Api.ApiController
                 
                 var res = await _context.Turnos
                                         .Include(e => e.doctor)
+                                        .Include(e => e.doctor.especialidad)
                                         .Where(e => e.idUsuario == usLog.Id && e.estado != 0)
                                         .ToListAsync();
                                        
@@ -114,8 +115,8 @@ namespace medTurno_Api.ApiController
         {
             try
             {
-                /* var turno = await _context.Turnos.SingleOrDefaultAsync(x => x.Id == id);
-                turno.estado = 0; */
+                /* var turno = await _context.Turnos.SingleOrDefaultAsync(x => x.Id == id);*/
+                turno.estado = 0; 
                                         
                 if (ModelState.IsValid)
                 {

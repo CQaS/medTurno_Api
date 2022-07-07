@@ -34,7 +34,7 @@ namespace medTurno_Api.ApiController
                                                 .Where(x => x.idEspecialidad == x.especialidad.id && x.estado != 0)
                                                 .Select(a => new 
                                                 { 
-                                                    a.id, a.nombre, a.matricula, a.horarioatencion, a.especialidad.especialidad
+                                                    a.id, a.nombre, a.matricula, a.horarioatencion, a.especialidad.tipo
                                                 })
                                                 .ToListAsync();
                 return Ok(res);

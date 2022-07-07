@@ -108,7 +108,7 @@
                   <option value="-1" selected>Selecciona ...</opction>
                   <?php
                             
-                            foreach (parent::listaPacientes() as $paciente)
+                            foreach (parent::get_listaPacientes() as $paciente)
                             {
                                 echo "<option value='".$paciente['id']."'>".$paciente['nombre']." - OS: ".$paciente['oSocial']."</option>";
                             }

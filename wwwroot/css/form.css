@@ -214,8 +214,8 @@ section .contenedor .formcontact .formbox .inputbox textarea
     resize: none;
     width: 100% !important;
     padding: 5px 0;
-    font-size: 18px;
-    font-weight: 300;
+    font-size: 15px;
+    font-weight: bold;
     color: #333;
     border: none;
     border-bottom: 1px solid #777;

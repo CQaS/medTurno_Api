@@ -277,6 +277,41 @@ namespace medTurno_Api.Models
 			return e;
 		}
 
+		public Usuario ObtenerPorDni(int dni)
+		{
+			Usuario e = null;
+			using (MySqlConnection connection = new MySqlConnection(connectionString))
+			{
+				string sql = $"SELECT id, dni, fecNac, Mail, nombre, telefono, avatar, password, pregunta, rol, idprestador FROM usuario WHERE dni=@dni";
+				using (MySqlCommand command = new MySqlCommand(sql, connection))
+				{
+					command.CommandType = System.Data.CommandType.Text;
+					command.Parameters.Add("@dni", MySqlDbType.VarChar).Value = dni;
+					connection.Open();
+					var reader = command.ExecuteReader();
+					if (reader.Read())
+					{
+						e = new Usuario
+						{
+							Id = reader.GetInt32(0),
+							dni = reader.GetInt32(1),
+							fecNac = reader.GetDateTime(2),							
+                            Mail = reader.GetString(3),
+							nombre = reader.GetString(4),
+							telefono = reader.GetInt32(5),
+							Avatar = reader.GetString(6),
+							password = reader.GetString(7),
+							pregunta = reader.GetString(8),
+							Rol = reader.GetInt32(9),
+							idPrestador = reader.GetInt32(10),
+						};
+					}
+					connection.Close();
+				}
+			}
+			return e;
+		}
+
 		public int Borrar(int idPrestador)
         {
             var i = 0;
