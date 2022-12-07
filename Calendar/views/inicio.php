@@ -49,9 +49,9 @@
                           <option value="leer">Listar todos</option>
                           <?php
 
-                            foreach (parent::get_listaProfecionales() as $profecional)
+                            foreach (parent::get_listaProfesionales() as $profesional)
                             {
-                                echo "<option value='".$profecional['id']."'>".$profecional['nombre']."</option>";
+                                echo "<option value='".$profesional['id']."'>".$profesional['nombre']."</option>";
                             }
                           
                           ?>
@@ -118,12 +118,12 @@
               </div>
               <div class="form-group col-md-8">
                 <label for="">Profesional:</label>
-                <select name="txtProfecional" id="txtProfesional" style="height: 36px; width: 300px;">
+                <select name="txtProfesional" id="txtProfesional" style="height: 36px; width: 300px;">
                   <option value="-1" selected>Selecciona ...</opction>
                   <?php 
-                            foreach (parent::get_listaProfecionales() as $profecional)
+                            foreach (parent::get_listaProfesionales() as $profesional)
                             {
-                                echo "<option value='".$profecional['id']."'>".$profecional['nombre']." (".$profecional['tipo'].")</option>";
+                                echo "<option value='".$profesional['id']."'>".$profesional['nombre']." (".$profesional['tipo'].")</option>";
                             }
                           
                   ?>

@@ -69,7 +69,7 @@ namespace medTurno_Api.Controllers
                 {
 
                     repositorioDoctor.Alta(i);
-                    TempData["Mensaje"] = "Profecional dado de Alta con Exito!!";
+                    TempData["Mensaje"] = "Profesional dado de Alta con Exito!!";
                     return RedirectToAction("Admin", "Home");
                 }
                 else
@@ -111,7 +111,7 @@ namespace medTurno_Api.Controllers
                 {
 
                     repositorioDoctor.Editar(i);
-                    TempData["Mensaje"] = "Profecional editado con Exito!!";
+                    TempData["Mensaje"] = "Profesional editado con Exito!!";
                     return RedirectToAction("Admin", "Home");
                 }
                 else
@@ -140,7 +140,7 @@ namespace medTurno_Api.Controllers
             try
             {
                 repositorioDoctor.Borrar(id);
-                return Json(new { success = true, menssage = "Profecional dado de baja con Exito!" });
+                return Json(new { success = true, menssage = "Profesional dado de baja con Exito!" });
 
             }
             catch (Exception ex)

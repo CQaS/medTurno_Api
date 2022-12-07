@@ -32,7 +32,7 @@ class admin extends dbConfig
                 return $this->initSession();
         }
 
-        function listaProfecionales()
+        function listaProfesionales()
         {
                 try
                 {
@@ -53,9 +53,9 @@ class admin extends dbConfig
                 
         }
 
-        function get_listaProfecionales()
+        function get_listaProfesionales()
         {
-                return $this->listaProfecionales();
+                return $this->listaProfesionales();
         }
 
         function listaPacientes()

@@ -27,7 +27,7 @@ namespace medTurno_Api.Models
         [Display(Name = "Fecha de Atencion")]
         public DateTime fechaTurno { get; set; }
         [Required]
-        [Display(Name = "Medico o Profecional")]
+        [Display(Name = "Medico o Profesional")]
         public int idDoctor { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace medTurno_Api.Models
         [Display(Name = "Codigo")]        
         public int id { get; set; }
         [Required]
-        [Display(Name = "Profecional")] 
+        [Display(Name = "Profesional")] 
         public string nombre { get; set; }
         [Required]
         public string matricula { get; set; }
